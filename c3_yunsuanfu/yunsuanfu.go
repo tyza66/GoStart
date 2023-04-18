@@ -22,5 +22,7 @@ func main() {
 	fmt.Println(a1<=a2) //关系运算符返回的结果是布尔值
 	if a1 == a2 {
 		fmt.Println("a1 == a2")
+	}else{
+		fmt.Println("a1!= a2")
 	}
 }
