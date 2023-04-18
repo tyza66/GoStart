@@ -73,8 +73,21 @@ func main() {
 	var isFlag bool
 	fmt.Println(isFlag)
 	//%t是值
-	fmt.Printf("%T,%t",isFlag,isFlag)
+	fmt.Printf("%T,%t", isFlag, isFlag)
 	fmt.Println()
+
+	//数值类型 无符号的前面加个uint8就是byte 他俩就是别名的关系
+	var age4 uint = 18
+	fmt.Printf("%T,%d", age4, age4)
+	fmt.Println()
+	var money float64 = 3.14
+	fmt.Printf("%T,%f", money, money)
+	fmt.Println()
+
+	//定义float会造成精度损失 计算的时候尽量不要用float进行计算 尽量用64的
+	var num1 float32 = -123.0000901
+	var num2 float64 = -123.0000901
+	fmt.Println("num1 =", num1, "num2 =", num2)
 
 	
 }
