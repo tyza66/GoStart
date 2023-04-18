@@ -89,7 +89,21 @@ func main() {
 	var num2 float64 = -123.0000901
 	fmt.Println("num1 =", num1, "num2 =", num2)
 
-	
+	v1 := 'A'
+	v2 := "A"
+	//单引号是字符类型 所以打印出来是int32 就是对应的ascii编码
+	//这里可以是中文 中文使用的是gbk里的
+	fmt.Printf("%T,%d\n",v1,v1)
+	fmt.Printf("%T,%s\n",v2,v2)
+
+	//字符串链接 使用\可以进行转义
+	fmt.Println("\"hello,"+"world\"")
+
+	//go语言不存在隐式类型转换所以都要显式转换使
+	a5 := 5.0
+	b5:= int(a)
+	fmt.Printf("%T,%f\n",a5,a5)
+	fmt.Printf("%T,%d\n",b5,b5)
 }
 
 func test() (int, int) {
