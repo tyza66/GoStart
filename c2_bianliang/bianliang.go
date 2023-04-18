@@ -104,6 +104,11 @@ func main() {
 	b5:= int(a)
 	fmt.Printf("%T,%f\n",a5,a5)
 	fmt.Printf("%T,%d\n",b5,b5)
+
+	c := float64(a5)
+	fmt.Printf("%T,%f\n",c,c)
+	//如果是不能相互转换的类型的话 编辑的时候就会报错，比如整形无法转换成布尔型
+	//如果精度低的转换成精度高的会求实精度
 }
 
 func test() (int, int) {
