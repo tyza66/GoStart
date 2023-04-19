@@ -27,16 +27,19 @@ func main() {
 	})
 	//获取传递的参数 get?方式
 	ginServer.GET("/get/user", func(context *gin.Context) {
-		context.Query("userId")
-        context.JSON(http.StatusOK, gin.H{"msg": "giao"}) //返回json数据
-    })
-
-    //启动服务
-    ginServer.Run(":8080")
-}
+		userid := context.Query("userId")
+		username := context.Query("userName")
+		context.JSON(http.StatusOK, gin.H{"userid": userid, "username": username}) //返回json数据
+	})
 
 	//使用路径的方式传递参数
+	ginServer.GET("/get/user/:username/:userid", func(context *gin.Context) {
+		userid := context.Param("userid")
+		username := context.Param("username")
+		context.JSON(http.StatusOK, gin.H{"userid": userid, "username": username}) //返回json数据
+	})
 
+	//前端给后端传递json
 
 	ginServer.Run("localhost:8080")
 }
