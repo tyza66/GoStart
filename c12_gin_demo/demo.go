@@ -1,10 +1,13 @@
 package main
 
 import (
+	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/thinkerou/favicon"
 	"net/http"
 )
+
+//自定义中间件拦截器
 
 func main() {
 	//创建一个gin服务
@@ -39,7 +42,46 @@ func main() {
 		context.JSON(http.StatusOK, gin.H{"userid": userid, "username": username}) //返回json数据
 	})
 
-	//前端给后端传递json
+	//前端给后端传递json 就是post传对象
+	ginServer.POST("/json", func(context *gin.Context) {
+		//request.body 这里面返回的是一个切片的
+		data, err := context.GetRawData()
+		if err != nil {
+			return
+		}
+		var m map[string]interface{}
+		//用这个把切片转成map
+		err2 := json.Unmarshal(data, &m)
+		if err2 != nil {
+			return
+		}
+		context.JSON(http.StatusOK, m)
+	})
+
+	//处理表单传来的信息
+	ginServer.POST("/user/add", func(context *gin.Context) {
+		username := context.PostForm("username")
+		password := context.PostForm("password")
+		context.JSON(http.StatusOK, gin.H{"username": username, "password": password})
+	})
+
+	//路由
+	ginServer.GET("/test", func(context *gin.Context) {
+		//重定向
+		context.Redirect(301, "https://www.baidu.com")
+	})
+
+	//没有路由就404
+	ginServer.NoRoute(func(context *gin.Context) {
+		context.HTML(http.StatusNotFound, "404.html", nil)
+	})
+
+	//路由组
+	userGroup := ginServer.Group("/user")
+	{
+		userGroup.GET("/delete")
+		userGroup.GET("/update")
+	}
 
 	ginServer.Run("localhost:8080")
 }
