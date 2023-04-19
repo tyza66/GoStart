@@ -8,13 +8,13 @@ import (
 	"net/http"
 )
 
-//自定义中间件拦截器
-func myHandler() gin.HandlerFunc{
+// 自定义中间件拦截器
+func myHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		//通过自定义的中间件,设置的值,在后续处理值要调用了这个中间件的都可以拿到这里的参数
-		c.Set("usersession","userid-1");
+		c.Set("usersession", "userid-1")
 		//在上面可以进行一些判断
-		c.Next() //放行
+		c.Next()  //放行
 		c.Abort() //阻断
 	}
 }
@@ -39,7 +39,7 @@ func main() {
 		})
 	})
 	//获取传递的参数 get?方式 后来加上了自己写的过滤器
-	ginServer.GET("/get/user", myHandler(),func(context *gin.Context) {
+	ginServer.GET("/get/user", myHandler(), func(context *gin.Context) {
 		//取出中间件中的值
 		s := context.MustGet("usersession").(string)
 		log.Println(s)
