@@ -30,6 +30,15 @@ func main() {
 	func(){
 		fmt.Println("giaogiao")
 	}()
+	func(a,b int) int{
+		fmt.Println(a,b)
+		return a+b
+	}(1,2)
+
+	//回调函数 我们可以把一个函数作为另一个函数的参数
+	//将dun1函数作为fun2函数的参数 那么fun2函数就叫高阶函数 fun1函数就叫回调函数
+	i := add2(1, 2, add)
+	fmt.Println(i)
 }
 
 // 函数名()里面是参数类型 后面的是返回值类型,函数体
@@ -103,4 +112,8 @@ func testDefer() {
 
 func testDefer2(s int) {
 	fmt.Println("函数接收到的a-", s)
+}
+
+func add2(a,b int, fun func(int,int) int) int{
+	return fun(a,b)
 }
