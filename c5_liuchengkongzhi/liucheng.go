@@ -79,4 +79,12 @@ func main() {
 		fmt.Printf("%c ", str[i])
 	}
 	fmt.Println()
+
+	//for range循环 遍历的时候使用非常方便 会返回下标和对应的值 我们直接诶用就完事了
+	for i,v := range str {
+		fmt.Printf("%d ", i)
+		fmt.Printf("%c ", v)
+	}
+	//string是不能修改的
+	//str[1] = 'a' 这样是不行的
 }
