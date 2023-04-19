@@ -41,6 +41,7 @@ func main() {
 		    return err               // 错误，err永远等于非nil，导致上层调用者err!=nil的判断始终为true
 		}
 	*/
+	//我们判断错误的方法就是检查错误信息是否为nil
 }
 
 // 有一个内置的接口类型error 里面只有一个返回值为string的方法Error()
