@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 // 通过这样实现了继承的关系
 type Human struct {
@@ -69,7 +72,23 @@ type ElderlyGent interface {
 	SpendSalary(amount float32)
 }
 
-//
+type Element interface{}
+type List []Element
+type Person struct {
+	name string
+	age  int
+}
+
+// 定义了String方法，实现了fmt.Stringer
+func (p Person) String() string {
+	return "(name: " + p.name + " - age: " + strconv.Itoa(p.age) + " years)"
+}
+
+//接口中嵌入其他接口 也就是隐士加入其他接口中的方法
+type YE interface {
+	YoungChap
+	ElderlyGent
+}
 
 func main() {
 	var stu Student = Student{Human{"Mike", 25, "222-222-XXX"}, "MIT", 0.00}
@@ -98,4 +117,33 @@ func main() {
 	//a = i
 	a = s
 	fmt.Println(a)
+	//Go语言里面有一个语法，可以直接判断是否是该类型的变量： value, ok = element.(T)，这里value就是变量的值，ok是一个bool类型，element是interface变量，T是断言的类型。
+	list := make(List, 3)
+	list[0] = 1       // an int
+	list[1] = "Hello" // a string
+	list[2] = Person{"Dennis", 70}
+	for index, element := range list {
+		if value, ok := element.(int); ok {
+			fmt.Printf("list[%d] is an int and its value is %d\n", index, value)
+		} else if value, ok := element.(string); ok {
+			fmt.Printf("list[%d] is a string and its value is %s\n", index, value)
+		} else if value, ok := element.(Person); ok {
+			fmt.Printf("list[%d] is a Person and its value is %s\n", index, value)
+		} else {
+			fmt.Printf("list[%d] is of a different type\n", index)
+		}
+	}
+	//用switch实现
+	for index, element := range list{
+		switch value := element.(type) {
+		case int:
+			fmt.Printf("list[%d] is an int and its value is %d\n", index, value)
+		case string:
+			fmt.Printf("list[%d] is a string and its value is %s\n", index, value)
+		case Person:
+			fmt.Printf("list[%d] is a Person and its value is %s\n", index, value)
+		default:
+			fmt.Println("list[%d] is of a different type", index)
+		}
+	}
 }
