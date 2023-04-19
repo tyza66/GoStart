@@ -57,4 +57,18 @@ func main() {
 	var n2 uint= 13
 	fmt.Printf("%d,%b\n",n1&n2,n1&n2)
 	fmt.Printf("%d,%b\n",n1|n2,n1|n2)
+	//一般在底层进行加密使用
+	// ^异或 相同为0 不同为1
+	fmt.Printf("%d,%b\n",n1^n2,n1^n2)
+	//>>右移  <<左移 就是二进制位整体想左或者向右移动
+	fmt.Printf("%d,%b\n",n1>>1,n1>>1)
+    fmt.Printf("%d,%b\n",n1<<2,n1<<2)
+
+	//赋值运算符 就是赋值的同时直接进行算数运算和位运算
+	var n3 = 66
+	n3 += int(n2)
+	fmt.Println(n3)
+
+	//& 取地址
+	//* 指针变量
 }
