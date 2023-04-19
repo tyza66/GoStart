@@ -52,4 +52,31 @@ func main() {
 	default:
 		fmt.Println("giao3")
 	}
+
+	//for循环
+	for i := 1; i <= 10; i++ {
+		fmt.Printf("%d ", i)
+	}
+	fmt.Println()
+
+	//求和1到10
+	var sum = 0
+	for i := 1; i <= 10; i++ {
+		sum += i
+	}
+	fmt.Println(sum)
+	//go里面for循环的三个条件哦度可以省略,但是要在循环里面控制循环条件
+	//可以使用break跳出循环 使用continue跳出本次循环
+	for {
+		break
+	}
+	//for遍历字符串
+	str := "giaogiao"
+	fmt.Println("字符长度为:", len(str)) //查看字符串的长度
+	fmt.Printf("第二个字节为:%c\n", str[1])
+
+	for i := 0; i < len(str); i++ {
+		fmt.Printf("%c ", str[i])
+	}
+	fmt.Println()
 }
